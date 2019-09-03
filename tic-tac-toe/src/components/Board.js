@@ -4,6 +4,7 @@ class Board extends Component {
   renderSquare = (i) => {
     return (
       <Square
+        squaresWin = {this.props.squaresWin}
         index = {i}
         isClick = {this.props.isClick}
         value={this.props.squares[i]}

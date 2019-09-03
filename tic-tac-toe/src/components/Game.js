@@ -9,7 +9,8 @@ class Game extends Component {
       }],
       xIsNext: true,
       stepNumber: 0,
-      isClick : undefined
+      isClick : undefined,
+      squaresWin : []
     };
   }
 
@@ -27,7 +28,8 @@ class Game extends Component {
       }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
-      isClick: i
+      isClick: i,
+      isWin : false
     });
   }
 
@@ -51,8 +53,12 @@ class Game extends Component {
     ];
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
-      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-        return squares[a];
+      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c] && !this.state.isWin) {
+        this.setState({
+          squaresWin:lines[i],
+          isWin : true
+        })
+        return squares[a]
       }
     }
     return null;
@@ -82,7 +88,7 @@ class Game extends Component {
     return (
       <div className="game">
         <div className="game-board">
-          <Board squares={current.squares} isClick={this.state.isClick}
+          <Board squares={current.squares} isClick={this.state.isClick} squaresWin={this.state.squaresWin}
             onClick={(i) => this.handleClick(i)} />
         </div>
         <div className="game-info">
