@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Square(props) {
+function Square(props) { 
   return (
-    <button className="square" onClick={props.onClick}>
+    <button className={props.isClick === props.index ? "square bg-red" : "square"} onClick={()=>props.onClick()}>
       {props.value}
     </button>
   );

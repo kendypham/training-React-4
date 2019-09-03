@@ -8,13 +8,14 @@ class Game extends Component {
         squares: Array(9).fill(null),
       }],
       xIsNext: true,
-      stepNumber: 0
+      stepNumber: 0,
+      isClick : undefined
     };
   }
 
   handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
-    const current = history[this.state.stepNumber];
+    const current = history[history.length-1];
     const squares = current.squares.slice();
     if (this.calculateWinner(squares) || squares[i]) {
       return;
@@ -26,6 +27,7 @@ class Game extends Component {
       }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
+      isClick: i
     });
   }
 
@@ -58,7 +60,7 @@ class Game extends Component {
 
   render() {
     const history = this.state.history;
-    const current = history[history.length - 1];
+    const current = history[this.state.stepNumber];
     const winner = this.calculateWinner(current.squares);
     const moves = history.map((step, move) => {
       const desc = move ?
@@ -80,7 +82,7 @@ class Game extends Component {
     return (
       <div className="game">
         <div className="game-board">
-          <Board squares={current.squares}
+          <Board squares={current.squares} isClick={this.state.isClick}
             onClick={(i) => this.handleClick(i)} />
         </div>
         <div className="game-info">
