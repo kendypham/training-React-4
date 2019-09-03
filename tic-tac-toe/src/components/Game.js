@@ -37,6 +37,8 @@ class Game extends Component {
     this.setState({
       stepNumber: step,
       xIsNext: (step % 2) === 0,
+      isClick : undefined,
+      squaresWin : []
     });
   }
 
