@@ -13,6 +13,10 @@ class Game extends Component {
       squaresWin : []
     };
   }
+  
+  /**
+   * @param  {number} i - the index of square in array
+   */
 
   handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
@@ -33,6 +37,10 @@ class Game extends Component {
     });
   }
 
+  /**
+   * @param  {number} step - The value which stores index of history array
+   */
+
   jumpTo(step) {
     this.setState({
       stepNumber: step,
@@ -41,6 +49,10 @@ class Game extends Component {
       squaresWin : []
     });
   }
+
+  /**
+   * @param  {Array} squares - The currents squares array
+   */
 
   calculateWinner(squares) {
     const lines = [
