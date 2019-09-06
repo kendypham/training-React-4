@@ -1,38 +1,57 @@
-import React, { Component,Fragment } from 'react'
+/* eslint-disable array-callback-return */
+import React, { Component, Fragment } from 'react'
 import Square from './Square'
 class Board extends Component {
-  renderSquare = (i) => {
+
+  /**
+   * @param  {number} i - the value and index of square in squares array
+   * 
+   */
+
+  renderSquare(i) {
     return (
       <Square
-        squaresWin = {this.props.squaresWin}
-        index = {i}
-        isClick = {this.props.isClick}
+        squaresWin={this.props.squaresWin}
+        index={i}
+        isClick={this.props.isClick}
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
       />
     );
   }
-  handleSquare = (item) => {
+
+  /**
+   * @param  {number} i - To calculate the value of square
+   */
+
+  handleSquare(i) {
     return <div className="board-row">
-    {
-      this.props.squares.map((value, index) => {
-        if(index >= item*3 && index < (item + 1)*3){
-          return <Fragment key={index}>{this.renderSquare(index)}</Fragment>
-        }
-      }) 
-    }
+      {
+        this.props.squares.map((value, index) => {
+          if (index >= i * 3 && index < (i + 1) * 3) {
+            return <Fragment key={index}>{this.renderSquare(index)}</Fragment>
+          }
+        })
+      }
     </div>
   }
 
-  squareToRender = () => {
-    let element = [];
-    for(let i = 0; i < 3; i++){
-       element.push(this.handleSquare(i))
+  /**
+   * Render three rows of board
+   */
+
+  squareToRender() {
+    const element = [];
+    for (let i = 0; i < 3; i++) {
+      element.push(this.handleSquare(i))
     }
-    return element.map((item,index) => {
-      return <Fragment key={index}>{item}</Fragment>;
-    });
+    return element.map((item, index) => <Fragment key={index}>{item}</Fragment>);
   }
+
+  /**
+   * Render board
+   */
+
   render() {
     return (
       <div>

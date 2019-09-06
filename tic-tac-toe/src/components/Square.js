@@ -1,10 +1,12 @@
 import React from 'react';
-
+/**
+ * @constructor
+ * @param {object} props - receive data from board
+ */
 function Square(props) { 
-  console.log(props.squaresWin.indexOf(props.index));
-  let classVar = props.squaresWin.includes(props.index)  ? "square bg-win bg-red" : (props.isClick === props.index ? "square bg-red" : "square") 
+  const classVar = props.squaresWin.includes(props.index)  ? "square bg-win bg-red" : (props.isClick === props.index ? "square bg-red" : "square") 
   return (
-    <button className={classVar} onClick={()=>props.onClick()}>
+    <button className={classVar} onClick={props.onClick}>
       {props.value}
     </button>
   );
