@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import Board from './Board'
+
+/**
+ * Total of cells you want to render
+ */
+const numberOfCell = 25
+
 class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {
       history: [{
-        squares: Array(9).fill(null),
+        squares: Array(numberOfCell).fill(null),
       }],
       xIsNext: true,
       stepNumber: 0,
       isClick : undefined,
-      squaresWin : []
+      squaresWin : [],
+      numberOfRow : Math.sqrt(numberOfCell)
     };
   }
   
@@ -70,19 +77,22 @@ class Game extends Component {
       const [a, b, c] = lines[i];
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c] && !this.state.isWin) {
         this.setState({
-          squaresWin:lines[i],
+          squaresWin : lines[i],
           isWin : true
         })
-        return squares[a]
       }
     }
-    return null;
+  }
+
+  componentDidUpdate(){
+    const history = this.state.history;
+    const current = history[this.state.stepNumber];
+    this.calculateWinner(current.squares);
   }
 
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
-    this.calculateWinner(current.squares);
     const moves = history.map((step, move) => {
       const desc = move ?
         'Go to move #' + move :
@@ -104,7 +114,7 @@ class Game extends Component {
       <div className="game">
         <div className="game-board">
           <Board squares={current.squares} isClick={this.state.isClick} squaresWin={this.state.squaresWin}
-            onClick={(i) => this.handleClick(i)} />
+            onClick={(i) => this.handleClick(i)} numberOfRow={this.state.numberOfRow}/>
         </div>
         <div className="game-info">
           <div>{status}</div>
