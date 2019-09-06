@@ -28,7 +28,7 @@ class Board extends Component {
     return <div className="board-row">
       {
         this.props.squares.map((value, index) => {
-          if (index >= i * 3 && index < (i + 1) * 3) {
+          if (index >= i * this.props.numberOfRow && index < (i + 1) * this.props.numberOfRow) {
             return <Fragment key={index}>{this.renderSquare(index)}</Fragment>
           }
         })
@@ -42,7 +42,7 @@ class Board extends Component {
 
   squareToRender() {
     const element = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < this.props.numberOfRow; i++) {
       element.push(this.handleSquare(i))
     }
     return element.map((item, index) => <Fragment key={index}>{item}</Fragment>);
