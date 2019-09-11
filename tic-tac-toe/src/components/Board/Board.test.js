@@ -1,7 +1,7 @@
 import React from 'react'
 import Board from './Board'
 import {shallow, mount} from 'enzyme'
-
+import '../../setupTests'
 it('renders without crashing', () => {
     let squares = Array(9).fill(null)
     shallow(<Board squares={squares}/>);
